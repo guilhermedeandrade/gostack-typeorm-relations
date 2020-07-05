@@ -29,13 +29,17 @@ class ProductsRepository implements IProductsRepository {
   }
 
   public async findByName(name: string): Promise<Product | undefined> {
-    const product = this.ormRepository.findOne({ where: { name } });
+    const product = await this.ormRepository.findOne({ where: { name } });
 
     return product;
   }
 
   public async findAllById(products: IFindProducts[]): Promise<Product[]> {
-    // TODO
+    const productsIds = products.map(product => product.id);
+
+    const findProducts = await this.ormRepository.findByIds(productsIds);
+
+    return findProducts;
   }
 
   public async updateQuantity(
