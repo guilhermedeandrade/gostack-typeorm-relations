@@ -18,13 +18,13 @@ class OrdersProducts {
 
   @ManyToOne(() => Order, order => order.order_products)
   @JoinColumn({ name: 'order_id' })
-  order!: Order;
+  order: Order;
 
   @ManyToOne(() => Product, product => product.order_products, {
     cascade: true,
   })
   @JoinColumn({ name: 'product_id' })
-  product!: Product;
+  product: Product;
 
   @Column()
   product_id: string;
